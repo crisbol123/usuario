@@ -8,7 +8,7 @@
 		<version>3.1.0</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.irojas</groupId>
+	<groupId>com.cbol</groupId>
 	<artifactId>demo-jwt</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>demo-jwt</name>
@@ -72,6 +72,17 @@
 			<artifactId>jjwt-jackson</artifactId>
 			<version>0.11.5</version>
 			<scope>runtime</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.mapstruct</groupId>
+			<artifactId>mapstruct</artifactId>
+			<version>1.5.3.Final</version>
+		</dependency>
+		<dependency>
+			<groupId>org.mapstruct</groupId>
+			<artifactId>mapstruct-processor</artifactId>
+			<version>1.5.3.Final</version>
+			<scope>provided</scope>
 		</dependency>
 	</dependencies>
 
