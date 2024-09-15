@@ -6,7 +6,6 @@ import com.pragma.usuario.usuario.adapters.driving.http.dto.user.request.LoginRe
 import com.pragma.usuario.usuario.adapters.driving.http.dto.user.response.AuthorizationResponse;
 import com.pragma.usuario.usuario.adapters.driving.http.mapper.login.request.LoginRequestMapper;
 import com.pragma.usuario.usuario.adapters.driving.http.mapper.login.response.AuthResponse;
-import com.pragma.usuario.usuario.adapters.securityconfig.AuthService;
 import com.pragma.usuario.usuario.domain.api.IUserServicePort;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -22,7 +21,6 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 public class AuthenticateController {
 
-    private final AuthService authService;
     private final IUserServicePort userServicePort;
     private final LoginRequestMapper loginRequestMapper;
     @Operation(summary = "Find user ID by username", description = "Returns the user ID based on the provided username.")

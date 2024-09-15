@@ -1,6 +1,7 @@
 package com.pragma.usuario.usuario.adapters.securityconfig.jwtconfiguration;
 
 
+import com.pragma.usuario.usuario.configuration.Constants;
 import com.pragma.usuario.usuario.domain.spi.JwtServicePort;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -52,11 +53,14 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                 authToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
 
                 SecurityContextHolder.getContext().setAuthentication(authToken);
+            }else {
+                response.sendError(HttpServletResponse.SC_UNAUTHORIZED, Constants.INVALID_TOKEN);
+            }
             }
         }
 
         filterChain.doFilter(request, response);
-    }}
+    }
 
     private String getTokenFromRequest(HttpServletRequest request) {
         final String authHeader = request.getHeader(HttpHeaders.AUTHORIZATION);

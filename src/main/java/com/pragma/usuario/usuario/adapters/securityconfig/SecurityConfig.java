@@ -26,17 +26,17 @@ public class SecurityConfig {
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(authRequest ->
                         authRequest
-                                .requestMatchers("/auth-user/login").permitAll()
-                                .requestMatchers("/v3/api-docs/**").permitAll()
-                                .requestMatchers("/swagger-ui/**").permitAll()
-                                .requestMatchers("/swagger-resources/**").permitAll()
-                                .requestMatchers("/webjars/**").permitAll()
-                                .requestMatchers("/create-user/admin").permitAll()
+                                .requestMatchers(
+                                        "/auth-user/login",
+                                        "/v3/api-docs/**",
+                                        "/swagger-ui/**",
+                                        "/swagger-resources/**",
+                                        "/webjars/**",
+                                        "/create-user/admin"
+                                ).permitAll()
                                 .requestMatchers("/auth-user/validate").hasAnyRole("WAREHOUSE_ASSISTANT", "ADMIN")
-                                .requestMatchers("/create-user/ware-house-assistant").hasRole("ADMIN")
-                                .requestMatchers("/create-user/customer").hasRole("ADMIN")
-                                .anyRequest().authenticated()
-                )
+                                .requestMatchers("/create-user/ware-house-assistant", "/create-user/customer").hasRole("ADMIN")
+                                .anyRequest().authenticated()  )
                 .sessionManagement(sessionManager ->
                         sessionManager
                                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS))

@@ -2,6 +2,7 @@ package com.pragma.usuario.usuario.configuration;
 
 import com.pragma.usuario.usuario.adapters.driven.jpa.mysql.adapter.UserAdapter;
 import com.pragma.usuario.usuario.adapters.driven.jpa.mysql.entity.UserEntity;
+import com.pragma.usuario.usuario.adapters.driven.jpa.mysql.exception.ElementNotFoundException;
 import com.pragma.usuario.usuario.adapters.driven.jpa.mysql.mapper.IUserEntityMapper;
 import com.pragma.usuario.usuario.adapters.driven.jpa.mysql.repository.IRoleRepository;
 import com.pragma.usuario.usuario.adapters.driven.jpa.mysql.repository.IUserRepository;
@@ -10,7 +11,6 @@ import com.pragma.usuario.usuario.adapters.securityconfig.jwtconfiguration.JwtSe
 import com.pragma.usuario.usuario.domain.api.IUserServicePort;
 import com.pragma.usuario.usuario.domain.spi.IUserPersistencePort;
 import com.pragma.usuario.usuario.domain.spi.JwtServicePort;
-
 import com.pragma.usuario.usuario.domain.usecases.UserUseCase;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
@@ -20,7 +20,6 @@ import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
@@ -57,7 +56,7 @@ public class BeanConfiguration {
             return username -> {
                 Optional<UserEntity> user = userRepository.findByEmail(username);
                 if (user.isEmpty()) {
-                    throw new UsernameNotFoundException("User not found");
+                    throw new ElementNotFoundException(Constants.USER_NOT_FOUND);
                 }
                 return new UserDetailsImp(user.get());
             };
